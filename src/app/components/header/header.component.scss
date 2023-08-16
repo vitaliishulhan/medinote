@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import 'variables';
+
+header {
+  height: $header-height;
+  position: sticky;
+  top: 0;
+  z-index: 101;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background-color;
+  padding: 8px 16px;
+}
+
+h1 {
+  color: white;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  column-gap: 16px;
+
+  button {
+    font-size: 18px;
+  }
+}

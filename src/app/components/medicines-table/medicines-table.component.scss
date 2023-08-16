@@ -1,0 +1,36 @@
+@import 'variables';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // height: calc(100vh - $header-height) !important;
+  // overflow: hidden;
+}
+
+table {
+  width: 100%;
+
+  .mat-mdc-header-row {
+    background-color: lighten($background-color, 10%);
+    color: white;
+  }
+
+  th {
+    font-size: 16px;
+    top: $header-height !important;
+  }
+
+  td {
+    padding: .75rem;
+    font-size: 16px;
+
+    .actions {
+      display: flex;
+      column-gap: 16px;
+      // width: 64px;
+    }
+  }
+}
+
+

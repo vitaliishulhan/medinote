@@ -30,9 +30,20 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src"
+              ]
+            },
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.scss"
+              "src/variables.scss",
+              "src/styles.scss",
+              {
+                "bundleName": "variables",
+                "inject": false,
+                "input": "src/variables.scss"
+              }
             ],
             "scripts": [],
             "serviceWorker": true,
