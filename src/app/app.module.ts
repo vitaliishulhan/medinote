@@ -6,11 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HeaderComponent } from './components/header/header.component';
 import { MedicinesTableComponent } from './components/medicines-table/medicines-table.component';
+import { StoreModule } from '@ngrx/store';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     HeaderComponent,
     MedicinesTableComponent,
@@ -21,10 +21,11 @@ import { MedicinesTableComponent } from './components/medicines-table/medicines-
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

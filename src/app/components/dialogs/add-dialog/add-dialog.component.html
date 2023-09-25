@@ -1,0 +1,22 @@
+<div app-dialog [dialog-close]="newData">
+  <span dialog-title>Створення запису про препарат</span>
+
+  <div dialog-content>
+    <h4>Назва</h4>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="newData.name" rows="5" cdkTextareaAutosize cdkFocusInitial></textarea>
+    </mat-form-field>
+    <h4>Діюча речовина</h4>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="newData.activeFluid" rows="3" cdkTextareaAutosize></textarea>
+    </mat-form-field>
+    <h4>Дозування</h4>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="newData.dosage" rows="7" cdkTextareaAutosize></textarea>
+    </mat-form-field>
+    <h4>Нотатка</h4>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="newData.note" rows="5" cdkTextareaAutosize></textarea>
+    </mat-form-field>
+  </div>
+</div>

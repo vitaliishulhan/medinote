@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+  <ng-content select="span[dialog-title]"></ng-content>
+</h1>
+
+<mat-dialog-content>
+  <ng-content select="div[dialog-content]"></ng-content>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Скасувати</button>
+  <button mat-button [mat-dialog-close]="dialogCloseData">Підтвердити</button>
+</mat-dialog-actions>

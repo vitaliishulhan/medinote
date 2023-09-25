@@ -6,8 +6,11 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
+      "@components/*": ["./src/app/components/*"],
+      "@dialogs/*": ["./src/app/components/dialogs/*"],
+      "@theming/*": ["./src/app/theming/*"],
+      "@app-types": ["./src/app/types.ts"],
       "@/*": ["./src/*"],
-      "@theming/*": ["./src/app/theming/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

@@ -1,18 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteDialogComponent, DeleteDialogData } from '@components/dialogs/delete-dialog/delete-dialog.component';
+import { Medicine } from '@app-types';
 import mock from './mock.json';
+import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
 
-export interface Medicine {
-  id: string;
-  name: string;
-  activeFluid: string;
-  dosage: string;
-  note: string;
-}
 
 const ELEMENT_DATA: Medicine[] = mock;
 
@@ -29,10 +26,15 @@ const ELEMENT_DATA: Medicine[] = mock;
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    CommonModule,
+    MatDialogModule,
+    NgIf,
   ],
 })
 export class MedicinesTableComponent {
+  constructor(
+    public dialog: MatDialog
+  ) {}
+
   displayedColumns: (keyof Medicine | 'actions')[] = [
     'name',
     'activeFluid',
@@ -45,10 +47,17 @@ export class MedicinesTableComponent {
   @Input() isLoading = false;
 
   editMedicine(m: Medicine) {
-    console.log(m);
+    this.dialog.open<EditDialogComponent, Medicine>(EditDialogComponent, {
+      data: m
+    });
   }
 
   deleteMedicine(m: Medicine) {
-    console.log(m);
+    this.dialog.open<DeleteDialogComponent, DeleteDialogData>(DeleteDialogComponent, {
+      data: {
+        id: m.id,
+        name: m.name
+      },
+    });
   }
 }
