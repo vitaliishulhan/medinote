@@ -1,0 +1,16 @@
+mat-form-field {
+  width: 100%;
+}
+
+.propositions {
+  max-height: 520px;
+  overflow: auto;
+}
+
+.proposition {
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+}

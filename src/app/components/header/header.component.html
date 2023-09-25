@@ -1,7 +1,7 @@
 <header>
-  <h1></h1>
+  <h1>{{searchValue}}</h1>
   <div class="controls">
     <button mat-flat-button color="accent" (click)="createMedicine()">Додати</button>
-    <button mat-flat-button color="warn">{{ isSearching ? 'Скасувати пошук' : 'Знайти' }}</button>
+    <button mat-flat-button color="warn" (click)="searchValue ? cancel() : search()">{{ searchValue ? 'Скасувати пошук' : 'Знайти' }}</button>
   </div>
 </header>

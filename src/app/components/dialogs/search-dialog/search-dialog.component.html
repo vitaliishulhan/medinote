@@ -1,0 +1,17 @@
+
+<div app-dialog [dialog-close]="{query: search, propositions}">
+  <span dialog-title>Пошук</span>
+
+  <div dialog-content>
+      <h4>Назва</h4>
+      <mat-form-field>
+        <input cdkFocusInitial matInput [(ngModel)]="search" (ngModelChange)="searchChange(search)"  />
+      </mat-form-field>
+      
+      <div class="propositions">
+        <div *ngFor="let item of propositions" class="proposition" (click)="setSearchQuery(item.name)">
+          {{item.name}}
+        </div>
+      </div>
+  </div>
+</div>

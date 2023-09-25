@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isLoading" color="warn" diameter="64"></mat-spinner>
 
-<table *ngIf="!isLoading" mat-table [dataSource]="dataSource">
+<table *ngIf="!isLoading" mat-table [dataSource]="medicines">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
