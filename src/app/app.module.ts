@@ -1,4 +1,5 @@
-import { APP_INITIALIZER, NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,12 +11,19 @@ import { StoreModule } from '@ngrx/store';
 import type { IAppState } from './store/app-state.model';
 import { searchReducer } from './store/reducers/seach.reducer';
 import { medicineReducer } from './store/reducers/medicine.reducer';
-import { InitialDataService } from './services/initialData.service';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { LoginPage } from '@components/login-page/login-page.component';
+import { FirebaseService } from './services/firebase/firebase.service';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    LoginPage,
+    NgIf,
     HeaderComponent,
     MedicinesTableComponent,
     BrowserModule,
@@ -30,16 +38,13 @@ import { InitialDataService } from './services/initialData.service';
     StoreModule.forRoot<IAppState>({
       search: searchReducer,
       medicine: medicineReducer,
+      // user: userReducer,
     }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (initialDataService: InitialDataService) => () => initialDataService.loadData(),
-      deps: [InitialDataService],
-      multi: true
-    }
-  ],
+  providers: [FirebaseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

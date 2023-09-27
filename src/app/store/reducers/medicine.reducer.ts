@@ -3,17 +3,23 @@ import { Medicine } from "@app-types";
 import * as MedicineActions from '../actions/medicine.actions';
 
 export interface IMedicinesState {
-  medicines: Medicine[];
+  medinotes: Medicine[];
 }
 
 export const initialState: IMedicinesState = {
-  medicines: []
+  medinotes: []
 }
 
 export const medicineReducer = createReducer(
   initialState,
-  on(MedicineActions.load, (state, { medicines }) => ({
-    ...state,
-    medicines
-  }))
-);
+  on(MedicineActions.loadMedicines, (state, { medinotes }) => {
+
+    // const r = medinotes.sort((a, b) =>
+    //   a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    // );
+
+    return {
+      ...state,
+      medinotes
+    };
+}));

@@ -4,7 +4,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   standalone: true,
-  selector: '[app-dialog]',
+  selector: 'app-dialog',
   templateUrl: './medinote-dialog.component.html',
   styleUrls: ['./medinote-dialog.component.scss'],
   imports: [
@@ -12,12 +12,19 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
   ]
 })
-export class MedinoteDialogComponent {
+export class MedinoteDialogComponent<T = unknown> {
   constructor(
       public dialogRef: MatDialogRef<MedinoteDialogComponent>,
   ) {}
     
-  @Input({ alias: 'dialog-close' }) dialogCloseData: unknown;
+  @Input({ alias: 'dialog-close' }) dialogCloseData: T | undefined;
+  @Input({ alias: 'confirm' }) checkConfirm: ((data: T) => boolean) | undefined;
+
+  confirm() {
+    if (this.checkConfirm && this.checkConfirm(this.dialogCloseData!)) {
+      this.dialogRef.close(this.dialogCloseData);
+    }
+  }
 
   cancel() {
     this.dialogRef.close();

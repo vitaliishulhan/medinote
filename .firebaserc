@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "medinote-ab14f": {
+      "hosting": {
+        "medinote": [
+          "medinote"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "medinote-ab14f"
+  }
+}

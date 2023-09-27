@@ -1,0 +1,16 @@
+<main>
+  <div class="login">
+    <h1>Medinote</h1>
+    <mat-form-field>
+      <mat-label>Електронна пошта</mat-label>
+      <input matInput type="email" [(ngModel)]="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Пароль</mat-label>
+      <input matInput type="password" [(ngModel)]="password" />
+    </mat-form-field>
+
+    <button mat-flat-button color="accent" (click)="logIn()">Увійти</button>
+  </div>
+</main>

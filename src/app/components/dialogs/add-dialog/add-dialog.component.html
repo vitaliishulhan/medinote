@@ -1,4 +1,4 @@
-<div app-dialog [dialog-close]="newData">
+<app-dialog [confirm]="check" [dialog-close]="newData">
   <span dialog-title>Створення запису про препарат</span>
 
   <div dialog-content>
@@ -6,6 +6,7 @@
     <mat-form-field>
       <textarea matInput [(ngModel)]="newData.name" rows="5" cdkTextareaAutosize cdkFocusInitial></textarea>
     </mat-form-field>
+    <p *ngIf="errors.name">{{errors.name}}</p>
     <h4>Діюча речовина</h4>
     <mat-form-field>
       <textarea matInput [(ngModel)]="newData.activeFluid" rows="3" cdkTextareaAutosize></textarea>
@@ -19,4 +20,4 @@
       <textarea matInput [(ngModel)]="newData.note" rows="5" cdkTextareaAutosize></textarea>
     </mat-form-field>
   </div>
-</div>
+</app-dialog>

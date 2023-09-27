@@ -1,3 +1,7 @@
-<app-header />
-<app-medicines-table />
-<router-outlet></router-outlet>
+  <login-page *ngIf="user === null; else mediData" />
+
+<ng-template #mediData>
+  <app-header />
+  <app-medicines-table />
+</ng-template>
+

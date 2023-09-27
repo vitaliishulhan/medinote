@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { Medicine } from "@app-types";
 
-export const load = createAction(
+export const loadMedicines = createAction(
   '[Medicine] Load',
-  props<{ medicines: Medicine[] }>()
+  props<{ medinotes: Medicine[] }>()
 );

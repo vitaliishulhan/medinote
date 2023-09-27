@@ -1,4 +1,4 @@
-<div app-dialog [dialog-close]="newData">
+<app-dialog [dialog-close]="newData">
   <span dialog-title>Редагування <b>{{name}}</b></span>
 
   <div dialog-content>
@@ -19,4 +19,4 @@
         <textarea matInput [(ngModel)]="newData.note" rows="5" cdkTextareaAutosize></textarea>
       </mat-form-field>
   </div>
-</div>
+</app-dialog>
