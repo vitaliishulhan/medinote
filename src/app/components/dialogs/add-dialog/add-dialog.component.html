@@ -1,23 +1,33 @@
-<app-dialog [confirm]="check" [dialog-close]="newData">
-  <span dialog-title>Створення запису про препарат</span>
+<h1 mat-dialog-title>
+  Створення запису про препарат
+</h1>
 
-  <div dialog-content>
+<form [formGroup]="form" #addMedinoteForm="ngForm">
+<mat-dialog-content>
     <h4>Назва</h4>
     <mat-form-field>
-      <textarea matInput [(ngModel)]="newData.name" rows="5" cdkTextareaAutosize cdkFocusInitial></textarea>
+      <textarea matInput formControlName="name" required rows="5" cdkTextareaAutosize cdkFocusInitial></textarea>
+      <mat-error *ngIf="form.controls.name.invalid">{{getErrorMessage(form.controls.name)}}</mat-error>
     </mat-form-field>
-    <p *ngIf="errors.name">{{errors.name}}</p>
+    
     <h4>Діюча речовина</h4>
     <mat-form-field>
-      <textarea matInput [(ngModel)]="newData.activeFluid" rows="3" cdkTextareaAutosize></textarea>
+      <textarea matInput formControlName="activeFluid" required="" rows="3" cdkTextareaAutosize></textarea>
+      <mat-error *ngIf="form.controls.activeFluid.invalid">{{getErrorMessage(form.controls.activeFluid)}}</mat-error>
     </mat-form-field>
     <h4>Дозування</h4>
     <mat-form-field>
-      <textarea matInput [(ngModel)]="newData.dosage" rows="7" cdkTextareaAutosize></textarea>
+      <textarea matInput formControlName="dosage" required="" rows="7" cdkTextareaAutosize></textarea>
+      <mat-error *ngIf="form.controls.dosage.invalid">{{getErrorMessage(form.controls.dosage)}}</mat-error>
     </mat-form-field>
     <h4>Нотатка</h4>
     <mat-form-field>
-      <textarea matInput [(ngModel)]="newData.note" rows="5" cdkTextareaAutosize></textarea>
+      <textarea matInput formControlName="note" rows="5" cdkTextareaAutosize></textarea>
     </mat-form-field>
-  </div>
-</app-dialog>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">скасувати</button>
+  <button mat-button [disabled]="!addMedinoteForm.valid" (click)="confirm()">підтвердити</button>
+</mat-dialog-actions>
+</form>

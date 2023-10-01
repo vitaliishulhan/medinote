@@ -13,13 +13,12 @@ export const initialState: IMedicinesState = {
 export const medicineReducer = createReducer(
   initialState,
   on(MedicineActions.loadMedicines, (state, { medinotes }) => {
-
-    // const r = medinotes.sort((a, b) =>
-    //   a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-    // );
+    const sorted = medinotes.slice().sort((a, b) =>
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
 
     return {
       ...state,
-      medinotes
+      medinotes: sorted
     };
 }));

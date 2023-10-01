@@ -18,12 +18,9 @@ export class MedinoteDialogComponent<T = unknown> {
   ) {}
     
   @Input({ alias: 'dialog-close' }) dialogCloseData: T | undefined;
-  @Input({ alias: 'confirm' }) checkConfirm: ((data: T) => boolean) | undefined;
 
   confirm() {
-    if (this.checkConfirm && this.checkConfirm(this.dialogCloseData!)) {
       this.dialogRef.close(this.dialogCloseData);
-    }
   }
 
   cancel() {

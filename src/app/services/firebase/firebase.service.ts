@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Firestore, getDocs, setDoc, doc, collection} from '@angular/fire/firestore';
+import { Firestore, getDocs, setDoc, deleteDoc, updateDoc, doc, collection} from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { IAppState } from '@/app/store/app-state.model';
 import { loadMedicines } from '@/app/store/actions/medicine.actions';
@@ -34,6 +34,16 @@ export class FirebaseService implements OnDestroy {
       ...m,
       id: newDocId
     });
+  }
+
+  async updateMedicine(m: Medicine) {
+    const {id: _, ...updatedData } = m;
+
+    await updateDoc(doc(this.fireStore, 'medinotes', this.auth.currentUser!.uid, 'data', m.id), updatedData);
+  }
+
+  async deleteMedicine(id: string) {
+    await deleteDoc(doc(this.fireStore, 'medinotes', this.auth.currentUser!.uid, 'data', id));
   }
 
   async logIn(email: string, password: string) {

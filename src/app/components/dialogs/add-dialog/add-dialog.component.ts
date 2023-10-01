@@ -1,12 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MedinoteDialogComponent } from '../_medinote-dialog/medinote-dialog.component';
-import { Medicine, TErrors } from '@app-types';
+import { Medicine } from '@app-types';
 
 
 export type TAddDialogData = Omit<Medicine, 'id'>;
@@ -21,46 +21,43 @@ export type TAddDialogData = Omit<Medicine, 'id'>;
     NgIf,
     MatDialogModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MedinoteDialogComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddDialogComponent {
-  public newData: TAddDialogData = {
-    name: '',
-    activeFluid: '',
-    dosage: '',
-    note: '',
-  };
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    activeFluid: new FormControl('', [Validators.required]),
+    dosage: new FormControl('', [Validators.required]),
+    note: new FormControl('', []),
+  });
 
-  public errors: TErrors<TAddDialogData> = {
-    name: 'Here'
-  }; 
+  
+  constructor(
+    public dialogRef: MatDialogRef<AddDialogComponent, TAddDialogData>
+  ) {}
 
-  check(data: TAddDialogData) {
-    this.errors = {};
-
-    if (!data.name) {
-      this.errors.name = 'Назва препарату не може бути пустою';
+  getErrorMessage(f: FormControl) {
+    if (f.hasError('required')) {
+      return 'Це поле не може бути порожнім';
     }
 
-    if (!data.activeFluid) {
-      this.errors.activeFluid = 'Активна речовина має бути подана';
-    }
+    return '';
+  }
 
-    if (!data.dosage) {
-      this.errors.dosage = 'Дозування має бути описане';
-    }
+  confirm() {
+    this.dialogRef.close({
+      name: this.form.controls.name.value!,
+      activeFluid: this.form.controls.activeFluid.value!,
+      dosage: this.form.controls.dosage.value!,
+      note: this.form.controls.note.value || '',
+    })
+  }
 
-    const isErrors = !!Object.keys(this.errors).length;
-
-    if (isErrors) {
-      alert(Object.values(this.errors).join('\n'));
-    }
-
-    return !Object.keys(this.errors).length;
+  cancel() {
+    this.dialogRef.close();
   }
 }

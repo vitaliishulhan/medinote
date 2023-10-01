@@ -54,7 +54,12 @@ export class SearchDialogComponent implements OnInit, OnDestroy {
 
   searchChange(search: string) {
     if (search.length > 2) { 
-      this.propositions = this.medicines.filter(({ name }) => this.levenshteinDistance(name.toLowerCase(), search.toLowerCase()) <= 2 || name.toLowerCase().includes(search.toLowerCase()));
+      this.propositions = this.medicines.filter(({ name }) => {
+        const n = name.toLowerCase();
+        const s = search.toLowerCase();
+
+        return n.includes(s) || this.levenshteinDistance(n, s) <= 2;
+      });
     } else {
       this.propositions = [];
     }

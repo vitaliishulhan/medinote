@@ -11,6 +11,7 @@ import { Medicine } from '@app-types';
 import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
 import type { IAppState } from '@/app/store/app-state.model';
 import { selectTableData } from '@/app/store/app.selector';
+import { FirebaseService } from '@/app/services/firebase/firebase.service';
 
 
 @Component({
@@ -32,7 +33,11 @@ export class MedicinesTableComponent implements OnInit {
 
   @Input() isLoading = false;
 
-  constructor(public dialog: MatDialog, private store: Store<IAppState>) {}
+  constructor(
+    public dialog: MatDialog,
+    private store: Store<IAppState>,
+    private firebaseService: FirebaseService
+  ) {}
 
   ngOnInit(): void {
     this.store.pipe(select(selectTableData)).subscribe((data) => {
@@ -42,25 +47,35 @@ export class MedicinesTableComponent implements OnInit {
         this.medicines = data.medicines;
       }
     });
-
   }
 
   editMedicine(m: Medicine) {
-    this.dialog.open<EditDialogComponent, Medicine>(EditDialogComponent, {
+    this.dialog.open<EditDialogComponent, any, Medicine>(EditDialogComponent, {
       data: m,
+    }).afterClosed().subscribe((data) => {
+      if (data) {
+        this.firebaseService.updateMedicine(data);
+      }
     });
   }
 
   deleteMedicine(m: Medicine) {
-    this.dialog.open<DeleteDialogComponent, DeleteDialogData>(
-      DeleteDialogComponent,
-      {
-        data: {
-          id: m.id,
-          name: m.name,
-        },
-      }
-    );
+    this.dialog
+      .open<DeleteDialogComponent, any, DeleteDialogData>(
+        DeleteDialogComponent,
+        {
+          data: {
+            id: m.id,
+            name: m.name,
+          },
+        }
+      )
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.firebaseService.deleteMedicine(data.id);
+        }
+      });
   }
 
   displayedColumns: (keyof Medicine | 'actions')[] = [
