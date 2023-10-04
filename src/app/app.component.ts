@@ -3,8 +3,6 @@ import { Subscription } from 'rxjs';
 import { Auth, User, user } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
 import { IAppState } from '@/app/store/app-state.model';
-import { Firestore, getDoc, doc, collection, collectionData } from '@angular/fire/firestore';
-import type { Medicine } from '@app-types'; 
 import { FirebaseService } from './services/firebase/firebase.service';
 
 @Component({
