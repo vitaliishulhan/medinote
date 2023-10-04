@@ -22,8 +22,4 @@ export class DeleteDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DeleteDialogData
   ) {}
-
-  confirm() {
-    console.log('DELETE CONFIRM', this.data);
-  }
 }
