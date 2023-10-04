@@ -2,5 +2,5 @@ import type { IAppState } from "./app-state.model";
 
 export const selectTableData = (state: IAppState) => ({
   search: state.search,
-  medicines: state.medicine.medinotes
+  medicines: state.medinotes.medinotes
 });

@@ -13,7 +13,7 @@ export const initialState: IMedicinesState = {
   medinotes: [],
 };
 
-export const medicineReducer = createReducer(
+export const medinotes = createReducer(
   initialState,
   on(MedicineActions.loadMedicines, (state, { medinotes }) => {
     const sorted = medinotes.slice().sort(sortFromAtoZ);
@@ -24,14 +24,14 @@ export const medicineReducer = createReducer(
     };
   }),
   on(MedicineActions.addMedicine, (state, { medinote }) => {
-    const sorted = state.medinotes
-      .slice()
-      .concat([medinote])
-      .sort(sortFromAtoZ);
+    const newMedinotes = state.medinotes.slice();
+      
+    newMedinotes.push(medinote);
+    newMedinotes.sort(sortFromAtoZ);
 
     return {
       ...state,
-      medinotes: sorted,
+      medinotes: newMedinotes,
     };
   }),
   on(MedicineActions.updateMedicine, (state, { medinote }) => {

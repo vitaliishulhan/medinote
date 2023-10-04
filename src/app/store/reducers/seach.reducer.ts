@@ -12,7 +12,7 @@ export const initialState: ISearchState = {
   propositions: []
 };
 
-export const searchReducer = createReducer(
+export const search = createReducer(
   initialState,
   on(SearchActions.search, (state, { query, propositions }) => {
     return {
