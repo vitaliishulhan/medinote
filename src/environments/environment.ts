@@ -1,4 +1,10 @@
-export const environment = {
+import type { FirebaseOptions } from '@angular/fire/app';
+
+export interface IEnvironment {
+  firebase: FirebaseOptions;
+}
+
+export const environment: IEnvironment = {
   firebase: {
     projectId: 'medinote-ab14f',
     appId: '1:568800240224:web:7e80052b6a461b537dd905',
